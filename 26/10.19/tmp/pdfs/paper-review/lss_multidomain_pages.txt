@@ -1,0 +1,1558 @@
+===== PDF PAGE 1 =====
+文章编号 ： 1003 - 0530 （ 2024 ） 05 - 0801 - 14
+第  40  卷  第  5  期
+2024  年  5  月
+信 号 处 理
+Journal of Signal Processing
+Vol .  40  No .  5
+May  2024
+海空背景下低慢小目标泛探雷达多域多维特征
+建模与分析
+邓振华
+1
+ 陈小龙
+* 2
+ 薛 伟
+1
+ 张 月
+3
+ 汪兴海
+2
+ 关 键
+2
+ 赵志坚
+2
+（ 1 .  哈尔滨工程大学烟台研究院 ， 山东烟台  264000 ；
+2 .  海军航空大学 ， 山东烟台  264001 ；
+3 .  中山大学电子与通信工程学院 ， 广东深圳  518107 ）
+摘  要 ： 飞鸟和无人机等 “ 低慢小 ” 目标回波微弱 、 特征不明显 ， 对雷达探测和识别提出了很高的要求 ， 对其特征建
+模与特性分析是基础 ， 而获取雷达多域多维的目标特征是前提 。 数字阵泛探雷达通过 “ 宽发窄收 ” 工作模式 ， 实现目
+标的长时间积累 ， 实现更高的积累增益和多普勒分辨率 ， 能够获得目标的多域多维特征 ， 为 “ 低慢小 ” 目标的精细化
+处理和探测识别一体化奠定了基础 。 该文针对海空背景下的飞鸟 、 旋翼和固定翼无人机 、 直升机等 “ 低慢小 ” 目标 ，
+利用数字阵泛探雷达系统获得的距离 - 方位 - 帧间 、 距离 - 脉冲 - 帧间等多维数据 ， 提取目标的时域回波特征 （ 单帧脉冲
+回波 、 动态脉冲回波 ） 、 变换域多普勒特征 （ 多普勒瀑布图 、 微多普勒谱 ） 、 长时间机动特征 （ 加速度序列 、 加加速度序
+列 、 航迹 ） 7 类 19 种多域多维特征 ， 能够充分的反映目标在单帧和多帧数据间的幅值起伏 、 能量变化 、 运动 、 机动 、 微动
+等特性 ， 从而实现对 “ 低慢小 ” 目标的精细化特性描述与分析 。 最后 ， 采集并构建了数字阵泛探雷达 “ 低慢小 ” 目标特
+征数据集 ， 对典型目标的特征进行验证和定量 、 定性分析 ， 总结不同目标的特征差异 ， 验证结果表明 ， 四种类型的 “ 低
+慢小 ” 目标的多维特征具有明显的区别 ， 获得的特征和差异将为后续的 “ 低慢小 ” 目标分类和识别提供重要支撑 。
+关键词 ： “ 低慢小 ” 目标 ； 数字阵泛探雷达 ； 回波特征 ； 多普勒特征 ； 机动特征
+中图分类号 ： TN 957 . 51    文献标识码 ： A   DOI ： 10 . 16798 /j . issn . 1003 - 0530 . 2024 . 05 . 001
+引用格式 ： 邓振华 ， 陈小龙 ， 薛伟 ， 等 .  海空背景下低慢小目标泛探雷达多域多维特征建模与分析 ［ J ］ .  信号处理 ，
+2024 ， 40 （ 5 ） ：  801 - 814 .  DOI ：  10 . 16798 /j . issn . 1003 - 0530 . 2024 . 05 . 001 .
+Reference format ： DENG Zhenhua ， CHEN Xiaolong ， XUE Wei ， et al .  Multi-domain and multi-dimensional feature 
+modeling and analysis of low ，  slow ，  and small targets via ubiquitous radar under sea and air background ［ J ］ .  Journal of 
+Signal Processing ，  2024 ，  40 （ 5 ） ：  801 - 814 .  DOI :  10 . 16798 /j . issn . 1003 - 0530 . 2024 . 05 . 001 .
+Multi-Domain and Multi-Dimensional Feature Modeling and Analysis of Low ，  
+Slow ，  and Small T argets via Ubiquitous Radar Under Sea and Air Background
+DENG Zhenhua
+1
+ CHEN Xiaolong
+* 2
+ XUE Wei
+1
+ ZHANG Yue
+3
+ 
+WANG Xinghai
+2
+ GUAN Jian
+2
+ ZHAO Zhijian
+2
+（ 1 .  Yantai Research Institute of Harbin Engineering University ，  Yantai ，  Shandong 264000 ， China ；  
+2 .  Naval Aviation University ，  Yantai ，  Shandong 264001 ， China ；  
+3 .  School of Electronics and Communication Engineering ，  Sun Yat-Sen University ，  
+Shenzhen ，  Guangdong 51 8107 ， China ）
+收稿日期 ： 2024 - 01 - 04 ； 修回日期 ： 2024 - 02 - 02
+* 通信作者 ： 陈小龙　 cxlcxl 1209 @ 163 . com   *Corresponding Author ： CHEN Xiaolong ，  cxlcxl 1209 @ 163 . com
+基金项目 ： 国家自然科学基金 （ 62222120 ， 61931021 ） ； 山东省自然科学基金 （ ZR 2021 YQ 43 ）
+Foundation Items ： The National Natural Science Foundation of China （ 62222120 ，  61931021 ） ；  The Natural Science Foundation of Shandong 
+（ ZR 2021 YQ 43 ）
+
+===== PDF PAGE 2 =====
+信 号 处 理 第  40  卷
+Abstract :  The weak echo and indistinct features of low ，  slow ，  and small （ LSS ）  targets ，  such as birds and drones ，  pose 
+high requirements for radar detection and recognition .  Feature modeling and analysis are the foundation ，  while obtaining 
+multi-domain and multi-dimensional target features for radar is the prerequisite .  The digital array ubiquitous radar 
+achieves long-time integration of targets through the “ wide beam transmission and narrow beam reception ”  working 
+mode ，  achieving a higher integration gain and Doppler resolution .  It can obtain multi-dimensional features of targets in 
+multiple domains ，  laying the foundation for the fine processing of LSS targets and the integration of detection and recog ‐
+nition .  This study focuses on LSS targets such as birds ，  rotors ，  fixed-wing aircraft ，  and helicopters in sea and air envi ‐
+ronments .  Using multi-dimensional data such as range ，  azimuth ，  inter-frame and range ，  pulse ，  inter-frame obtained 
+from a digital array ubiquitous radar system ，  time-domain echo features of the LSS targets （ single frame and dynamic 
+pulse echoes ） ，  transform domain Doppler features （ Doppler waterfall plot and micro-Doppler spectrum ） ，  and long-
+time maneuvering features （ acceleration sequence ，  and trajectory ）  7  categories and 19  types of multi-domain and multi-
+dimensional features are extracted ，  which can fully reflect the amplitude fluctuations ，  energy changes ，  motion ，  maneu ‐
+vering ，  micro-motion ，  and other characteristics of the target between single and multiple frames of data ，  thereby achiev ‐
+ing fine characterization and analysis of LSS targets .  Finally ，  a dataset of LSS target features was collected and con ‐
+structed using the ubiquitous digital array radar .  The characteristics of typical targets were validated and quantitatively 
+and qualitatively analyzed ，  and the feature differences of different targets were summarized .  Regarding signal character ‐
+istics ，  single-frame pulse echo plots of the rotor wing drone ，  helicopter ，  and fixed-wing aircraft are periodic ；  the single-
+frame pulse echo of the flying bird fluctuates irregularly and is not periodic .  The time-domain information entropy of the 
+echoes of the flying bird is the largest ，  followed by that of the helicopter and the fixed-wing airplane ，  and that of the 
+rotor-wing drone is the smallest .  The radar cross section （ RCS ）  is the largest for helicopters ，  followed by flying bird 
+flocks ，  and the smallest for fixed-wing aircraft and rotor-wing drones .  The micromotion characteristics of helicopters ，  
+rotor-wing drones ，  and fixed-wing aircraft are obvious and have periodic variations ；  those of flying bird flocks have 
+some micromotion characteristics but do not have periodic variations .  As for the motion characteristics ，  the motion of 
+the aircraft is relatively smooth ，  and the changes in speed and acceleration are also relatively smooth ，  while the maneu ‐
+vering of the flying birds is stronger and more irregular .  Helicopters and fixed-wing aircraft basically do a straight line or 
+simple curve motion ；  flying birds do a nearly straight line or curve motion with small curvature ，  while rotor-wing 
+drones are manipulated by human beings ，  and the corresponding trajectories are more complicated .  The validation re ‐
+sults showed significant differences in the multi-dimensional features for the four types of LSS targets ，  and the obtained 
+features and differences would provide important support for subsequent classification and recognition of LSS targets .
+Key words :  low ，  slow ，  and small （ LSS ）  targets ； ubiquitous digital array radar ； echo features ； Doppler features ；
+maneuvering features
+1 　引言
+近年来 ， 飞鸟和无人机等 “ 低慢小 ” 目标对国家
+安全和国民经济的正常发展带来了极大的威胁 ， 如
+“ 低慢小 ” 航空器的 “ 黑飞 ” 、 恐怖袭击 、 非法测绘和
+频繁的客机鸟击事件
+［ 1 ］
+。 我国拥有漫长的海岸线 ，
+海空背景下对 “ 低慢小 ” 目标的探测与识别技术的
+需求显著增加 ， 对 “ 低慢小 ” 目标进行有效的监测具
+有重要的安全意义和经济利益 。 如何及时有效对
+“ 低慢小 ” 目标的带来的威胁做出预警与规避 ， 已成
+为重点研究解决的一项重要任务 。
+“ 低 慢 小 ” 目 标 散 射 截 面 积 （ Radar Cross Sec ‐
+tion ，  RCS ） 小 、 雷达回波微弱且难以积累 、 目标特征
+提取难 ， 有低可观测性
+［ 2 ］
+， 目标分类识别难度大 。 精
+准地对 “ 低慢小 ” 目标进行自动识别和分类 ， 本质上
+是准确 、 针对性的特征建模 、 分析和提取 ， 从而提高
+雷达信号的处理效率和精度 。 因此 ， 对雷达多域多
+维特征建模和 “ 低慢小 ” 目标特征分析是目标识别 、
+分类的基础和关键 。 目前 ， 主流方法是构建和提取
+目标的微多普勒特征 、 回波和机动特征 。 通过短时傅
+里叶变换 （ Short-time Fourier transform ，  STFT ）
+［ 3 - 7 ］
+、
+平滑伪 Wigner-Viller 分布  （ Smooth pseudo Wigner-
+Viller distribution ，  SPWVD ）
+［ 8 - 10 ］
+、 正 则 化 二 维 复 对
+数 - 傅里叶变换
+［ 11 ］
+、 经验模式分解 （ Empirical model 
+decomposition ，  EMD ）
+［ 4 ］
+、 奇 异 值 分 解 （ Singular 
+value decomposition ，  SVD ）
+［ 3 - 4 ， 8 ］
+提取微多普勒特征 ，
+表现形式为频谱图 、 倒谱图 。 通过信号处理提取
+“ 低慢小 ” 目标的极化特征
+［ 12 - 13 ］
+、 分形特征
+［ 14 - 15 ］
+、 高分
+辨距离像特征
+［ 16 ］
+、 RCS 特征
+［ 17 - 18 ］
+、 航迹
+［ 17 ］
+、 速度
+［ 17 ］
+、
+时域和频域的统计特征
+［ 19 - 21 ］
+等 。 目标的回波 、 机动
+802
+
+===== PDF PAGE 3 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+特征不明显且较难获取 ， 通常是利用目标的微多普
+勒特征 ， 但传统雷达下目标的易失性使得可靠提取
+微多普勒特征变得困难
+［ 22 ］
+。
+针对传统雷达多普勒分辨率低 、 脉冲回波信号
+维度少 、 可提取特征较少的问题 ， 一系列新体制阵
+列被用于探测系统中 。 新体制雷达为目标精细化
+处理和探测识别一体化奠定了硬件基础
+［ 1 ］
+， 如雷达
+信号维度的增加可提取多域多维特征 。 数字阵泛
+探雷达无需波束扫描和复杂的资源调度 ， 可实现全
+时空覆盖 ； 通过长时间积累获得更高的增益和多普
+勒分辨率 ， 同时可实现大批量目标的同时检测跟
+踪
+［ 23 ］
+。 近年来 ， 越来越多研究者利用数字阵泛探雷
+达 的 优 势 对 “ 低 慢 小 ” 目 标 进 行 自 动 识 别 和 分
+类
+［ 24 - 28 ］
+， 但数据利用不充分 ， 回波信号与数据特征结
+合不紧密 。 数字阵泛探雷达提高强杂波背景下 “ 低
+慢小 ” 目标的检测和识别能力 ， 需准确提取目标的
+多域多维特征 ， 并利用多域多维特征融合提高分类
+准确率 。
+本文以海空背景下的飞鸟及无人机等典型 “ 低
+慢小 ” 目标为例 ， 基于数字阵泛探雷达的实测数据 ，
+通过雷达多域多维特征进行建模与参数化表征 ， 对
+“ 低慢小 ” 典型目标进行多域多维特征分析 ， 研究目
+标时域回波特征 、 变换域多普勒特征 、 长时间机动
+特征等 7 类 19 种多域多维特征的差异性 ， 为后续的
+目标分类和识别奠定基础 。
+2 　雷达多域多维特征建模
+假设数字阵泛探雷达发射 M 个周期的相干脉
+冲信号探测海空 “ 低慢小 ” 目标 ， 其发射的信号波形
+为线性调频信号 。 将第 m 个脉冲重复周期的海杂
+波回波信号记作 S
+c m
+( t ) ， 目标回波信号记作 S
+r m
+( t ) ， 对
+M 个周期的回波信号进行快时间采样和重排得到
+距离像 ， 其中 Q 为快时间采样单元 （ 距离单元 ） 数
+目 。 雷达在第 m 个脉冲重复周期接收到的回波信
+号 S
+m
+( t ) 可以表示为 ：
+S
+m
+( t ) = S
+r m
+( t ) + S
+c m
+( t )  S Î C
+M ´ Q
+（ 1 ）
+在 M 个周期时间内 ， 由于 “ 低慢小 ” 目标的速度
+v 一般远小于光速 c ， 同一目标的回波可以被认为是
+不跨距离单元运动且一直较为稳定的存在的 。 通
+常情况下以 M 个脉冲为一组进行数据处理 ， 称为相
+参处理时间 （ Coherent Processing Interval ，  CPI ） ， 一
+个 CPI 内的数据采集通常会使用固定的脉冲重复
+间 隔 （ Pulse Repetition Interval ，  PRI ） 、 雷 达 频 率 和
+波 形 。 因 此 ， C 个 接 收 通 道 ， M 个 脉 冲 ， 单 个 脉 冲
+的 L 个 采 样 点 可 以 组 成 一 个 雷 达 数 据 立 方 体
+Y Î C
+M ´ C ´ L
+， 如图 1 所示 。
+通过对雷达数据立方体 Y 进行数据处理 ， 即对
+N 个接收通道的处理是波束形成 ， 对单个脉冲 L 个
+样点的处理是脉冲压缩 ， 对 M 个脉冲的处理是多普
+勒处理 ， 分别可以得到目标的方位 （ A ） 、 距离 （ R ） 和
+速度 （ V ） 信息 。
+一个相参处理时间 （ CPI ） 的数据可以组成数据
+立方体的一帧 ， 即单帧脉冲回波数据 。 因此 ， T 个方
+位单元 ， D 个距离单元 ， N 个相参处理时间可以组成
+一个雷达数据立方体 X Î C
+T ´ N ´ D
+， 如图 2 所示 。 通过
+对距离 - 方位 - 帧数据立方体 X 进行数据处理 ， 提取
+特征得到一系列特征图 ， 如航迹图 、 速度序列图 、 加
+速度序列图 、 加加速度序列图 。
+同 理 ， M 个 脉 冲 回 波 ， D 个 距 离 单 元 ， N 个 相
+参 处 理 时 间 可 以 组 成 一 个 雷 达 数 据 立 方 体
+P Î C
+M ´ N ´ D
+， 如图 3 所示 。 通过对距离 - 脉冲 - 帧数据
+立方体 P 进行数据处理 ， 提取特征得到一系列特征
+图 ， 如 多 普 勒 瀑 布 图 、 微 多 普 勒 谱 、 动 态 脉 冲 回
+波图 。
+图 1 　雷达数据立方体
+Fig . 1 　 Radar data cube
+图 2 　距离 - 方位 - 帧数据立方体
+Fig . 2 　 Range-azimuth-frame data cube
+803
+
+===== PDF PAGE 4 =====
+信 号 处 理 第  40  卷
+2 . 1 　脉冲回波时域图
+数 字 阵 泛 探 雷 达 采 用 线 性 调 频 （ Linear Fre ‐
+quency Modulation ，  LFM ） 信号作为雷达发射信号 ，
+可表示为 ：
+}s ( )t = r e c t ( )t / T
+p
+e x p { j 2 π ( )f
+c
+t + γ t
+2
+/ 2 （ 2 ）
+r e c t ( u ) =
+ì
+í
+î
+1  | u | ≤ 0 . 5
+0  | u | > 0 . 5
+（ 3 ）
+其中 ， T
+p
+、 f
+c
+和 γ 分别表示脉冲持续时间 、 载波频率和
+线性调频频率 。
+在实际应用中 ， 使用数字正交解调系统将接收
+信号解调到基带 。 第 p 个阵元的基带信号为 ：
+s
+p
+( t ) = A
+r
+r e c t { }( )t - 2 R / c / T
+p
+×
+e x p { }- j 2 π f
+c ( )2 R / c + j π γ ( )t - 2 R / c
+2
+（ 4 ）
+其中 ， A
+r
+是从目标反射的回波的幅度 。 R 表示目标与
+阵元之间的距离 ， c 是光速 ， d 是相邻阵元之间的距
+离 。 M 个阵元的基带信号数字波束合成后可表示为 ：
+s
+M
+( t ) = w
+n
+s
+p
+( t ) = ∑
+m = 1
+M
+w
+*
+n  m
+A
+r
+r e c t { }( t - 2 R / c ) / T
+p
+×
+e x p { }- j 2 π f
+c
+( 2 R / c ) + j π γ ( )t - 2 R / c
+2
+（ 5 ）
+其中 ， w
+n
+是波束形成器权重向量 。
+对波束空间输出 s
+M
+( t ) 实施匹配滤波 ， 得到脉冲
+压缩后回波的 “ 距离—慢时间 ” 表达式 ：
+s
+r m
+( r  t
+m
+) = A
+r
+s i n c
+é
+ë
+êêêê
+2 B
+c
+( r - r
+s
+( t
+m
+) )
+ù
+û
+úúúú
+e x p
+(
+- j
+4 π r
+s
+( t
+m
+)
+λ )
++ w （ 6 ）
+其中 ， B 表示 LFM 信号带宽 ， t
+m
+表示慢时间 ， c 表示光
+速 ， r
+s
+（ t
+m
+） 为目标在 t
+m
+时刻的距离 ， w 表示接收噪声 ， λ
+表示发射信号波长 。
+对式 （ 6 ） 进行离散化处理 ， 可得到回波数字域
+表达式 ：
+S
+r m
+( n  m ) = s
+r m
+(
+n
+c T
+s
+2
+ m T
+r
+)
+（ 7 ）
+其中 ， n 表示距离量化结果 ， m 表示速度量化结果 。
+假设目标保持在给定的分辨率距离单元 r
+0
+中 ，
+则单帧雷达脉冲回波可以表示为 S
+r
+0
+m
+( n
+0
+ m ) 。 若将
+每个 CPI 内的回波 S
+r
+0
+m
+( n
+0
+ m ) 峰值组成序列可以表
+示为动态回波 S
+m a x
+， 如式 （ 8 ） 所示 。 其中 ， f 表示帧数 。
+S
+m a x
+( f ) = m a x [ S
+r
+0
+m
+( n
+0
+ m ) ] （ 8 ）
+脉冲回波信号单帧幅值方差 V
+S
+r
+0
+m
+、 多帧最大幅
+值方差 V
+S m a x ( f )
+可表示回波能量的波动情况 ， 两者的
+计算公式如下 ：
+V
+S
+r
+0
+m
+=
+1
+M
+∑
+x = 1
+M
+[ S
+r
+0
+m
+( n
+0
+ m ) - m e a n ( S
+r
+0
+m
+( n
+0
+ m ) ) ]
+2
+   （ 9 ）
+V
+S m a x ( f )
+=
+1
+F
+∑
+f = 1
+F
+[ S
+m a x
+( f ) - m e a n ( S
+m a x
+( f ) ) ]
+2
+（ 10 ）
+其中 ， m e a n ( × ) 表示序列的均值 ， M 表示脉冲数 ， F 表
+示帧数 。
+根 据 雷 达 方 程 推 导 出 雷 达 散 射 截 面 （ Radar 
+Cross Section ，  RCS ） 计算公式 ：
+R C S =
+P
+r
+( 4 π )
+3
+R
+0
+P
+t
+G
+2
+λ
+2
+（ 11 ）
+其中 ， 雷达发射功率为 P
+t
+， 雷达接收功率为 P
+r
+， 雷达天
+线增益为 G ， 接收天线与目标的距离为 R
+0
+， 信号波长
+为 λ 。 采集数据过程中 ， 雷达参数始终保持一致 ， 目标
+的动态脉冲回波归一化均值 ， 可以表征 RCS 大小 。
+通信理论中信息熵的概念可定义脉冲回波时
+域特征
+［ 19 ］
+。 回波时间序列的信息熵可以表征目标
+的不同姿态 ， 令 J 为由脉冲回波的幅度组成的时间
+序列 ， 将 J 所覆盖的幅度范围划分为 K 个长度相等
+的 独 立 段 ， 用 N
+k
+表 示 幅 度 的 大 小 落 入 第 k 段 的 元
+素 ， 返回信号的幅度落入第 k 段的概率记为 P ( N
+k
+) ，
+则时间序列的信息熵 T I E ( J ) 可表示为 ：
+P ( N
+k
+) =
+N
+k
+N
+（ 12 ）
+T I E ( J ) = - ∑
+k = 1
+m
+P ( N
+k
+) l o g
+2 ( P ( N
+k
+) ) （ 13 ）
+2 . 2 　多普勒瀑布图
+假设目标保持在给定的分辨率距离单元中 ， 即
+图 3 黄色部分 。 对给定距离单元一个 CPI 数据块的
+脉冲回波做快速傅里叶变换 （ Fast Fourier Transform ，  
+FFT ） 可得到目标一个多普勒帧即微多普勒谱 ， 再将
+多帧数据堆叠在一起得到多普勒瀑布图 。 对雷达脉
+图 3 　距离 - 脉冲 - 帧数据立方体
+Fig . 3 　 Range-pulse-frame data cube
+804
+
+===== PDF PAGE 5 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+冲返回波 S
+m
+( t ) 进行快速傅里叶变换可表示为 ：
+S ( f ) =
+∫
+- ¥
++ ¥
+S
+m
+( t ) e
+- j 2 π f t
+d t （ 14 ）
+多普勒瀑布图表征目标的各个多普勒频率分
+量随时间的变化情况 ， 是从全局的角度观察目标的
+主体 、 微动部件产生的微多普勒频率随时间的变化
+情况 。 同时 ， 多普勒瀑布图中的每一帧数据都能获
+得反映目标微运动状态的微多普勒特征
+［ 28 ］
+。
+2 . 3 　微多普勒谱
+微动目标运动可分解为主体平动与微动两部
+分 。 微动目标雷达回波信号 S ( t ) 的一般表达式为 ：
+S ( t ) = ∑
+l = 1
+U
+σ
+l ( )t e x p
+( )
+-
+j 4 π r
+l ( )t
+λ
+= S
+T ( )t S
+M ( )t    （ 15 ）
+其中 ， S
+T ( t ) 为主体平动对雷达回波的多普勒调制部
+分 ， S
+M ( t ) 为微动对雷达回波的调制部分 ， U 为目标
+散射中心数量 ， r
+l ( t ) 为目标第 l 个散射中心的瞬时
+距离 ， σ
+l ( t ) 为目标第 l 个散射中心的雷达截面积 ， λ
+为雷达波长 。
+对刚体微动目标 ， 目标所有散射中心均存在微
+动 ， 散射中心的瞬时多普勒定义为 ：
+f ( t ) = -
+2
+λ
+d r ( )t
+d t
+= f
+T ( t ) + f
+m d
+( t ) （ 16 ）
+其中 ， r ( t ) 为散射中心运动引起的径向距离变化 ，
+f
+T ( t ) 为平动多普勒 ， f
+m d
+( t ) 为微多普勒
+［ 29 ］
+。
+旋翼飞行器的回波定义 S
+Σ
+( t ) 为 ：
+S
+Σ
+( t ) =  ∑
+m = 1
+M
+l
+0
+e x p
+(
+- j 4 π ( )R
+0  m
++ Z
+0  m
+s i n β
+m
+λ )
+×
+∑
+k = 0
+N - 1
+s i n c
+(
+4 π
+λ
+l
+0
+2
+c o s β
+m
+c o s
+(
+ω
+m
+t + φ
+0  m
++
+2 ( )k - 1 π
+N ) )
+e x p ( - j Φ
+k  m ( t ) )
+（ 17 ）
+其中 ， M 为旋翼数 ； l
+0
+为旋翼叶片长度 ； R
+0  m
+为雷达阵
+元中心到第 m 个旋翼中心的距离 ； Z
+0  m
+为第 m 个旋翼
+叶片高度 ； β
+m
+为雷达阵元中心到第 m 个旋翼的俯仰
+角 ； N 为单个旋翼叶片数 ； ω
+m
+为第 m 个旋翼转动角频
+率 ； φ
+0  m
+为第 m 个旋翼初始旋转角 ； Φ
+k  m ( t ) 为相位函
+数
+［ 7 ］
+。 通 过 对 旋 翼 飞 行 器 的 回 波 信 号 相 位 函 数
+Φ
+k  m ( t ) 时间求导 ， 可得到旋翼的等效瞬时微多普勒
+频率 。
+飞鸟翼尖的线速度可以表示为 ：
+ν ( t ) = W ω ( t ) = - 2 W π A f
+f l a p
+s i n ( 2 π f
+f l a p
+t ) （ 18 ）
+其中 ， ω ( t ) 为翅膀扑动角速度 ， A 为翅膀扑动幅度 ，
+f
+f l a p
+为扑打频率 ， W 飞鸟翼展长度 。
+对目标多普勒瀑布图的每一帧多普勒调制谱
+进行处理 ， 包括零频附近强杂波滤除 、 调制谱对数
+正则化和主频对齐和抑制操作
+［ 30 - 31 ］
+， 如图 4 所示 ， 可
+得到目标的单帧微多普勒谱 ， 如 图 5（ a ） 所示 。 对原
+图 4 　提取有效微多普勒谱流程图
+Fig . 4 　 Flow chart for extracting an effective micro-Doppler spectrum
+图 5 　直升机微多普勒特征
+Fig . 5 　 Micro-Doppler characteristics of a helicopter
+805
+
+===== PDF PAGE 6 =====
+信 号 处 理 第  40  卷
+始采集数据做短时傅里叶变换可得到目标的时频
+图 ， 如图 5（ b ） 所示 。 单帧微多普勒谱和时频图均可
+表 征 微 动 部 件 产 生 的 微 多 普 勒 频 率 的 详 细 变 化
+情况 。
+2 . 4 　长时间机动特征
+数字阵泛探雷达具有连续探测和高数据率的
+特点 ， 可获取目标精细化的机动特征 。 雷达接收到
+的目标参数有距离 、 方位角 、 俯仰角 ， 进而推导出目
+标航迹 、 高度 、 速度 、 加速度以及加速度的变化率等
+参数 。
+2 . 4 . 1 　速度
+K 个方位单元 ， D 个距离单元 ， N 个相参处理脉
+冲可以组成一个雷达数据立方体 X Î C
+K ´ N ´ D
+， 如图 2
+所示 。 通过式 （ 19 ） ~ （ 21 ） ， 利用数据立方体 X 可以
+获得目标的速度 v 、 加速度 a 和加加速度 F a 。
+v =
+ x
+P R I
+（ 19 ）
+a =
+ v
+P R I
+（ 20 ）
+F a =
+ a
+P R I
+（ 21 ）
+其中 ， P R I 表示一个 CPI 处理时间 ， x 表示目标距离 。
+加速度反映目标的速度变化 、 机动灵活性 ； 加
+速度的变化率反映目标轨迹的平滑度和转弯次数 。
+加速度和加加速度的过零点数表示加速度和加加
+速度的变化的剧烈程度 ， 值越小则目标飞行状态较
+稳定 。 设定一个容量 th = 0 . 5 ， 统计加速度和加加速
+度序列中绝对值大于容量 th 的个数 ， 目标归一化帧
+数的过零点数可表征目标的机动性 。
+速度变异系数定义为速度序列标准差与均值
+之比 ：
+S v =
+V v
+-
+v
+（ 22 ）
+其中 ， vˉ 表示速度均值 ， V v 表示速度标准差 。
+vˉ =
+∑
+i = 1
+n
+v
+i
+n
+（ 23 ）
+V v =
+1
+n
+∑
+i = 1
+n
+( v
+i
+- vˉ )
+2
+（ 24 ）
+速度变异系数反映速度离散程度 ， 可表征速度
+在观测时间内整体波动情况 。
+2 . 4 . 2 　航迹
+定 义 P
+t
+为 t 时 刻 的 航 迹 点 ， P
+t
+之 前 航 迹 点 为
+P
+t - 1
+， P
+t
+之后航迹点为 P
+t + 1
+， 最大时间窗为前后 N 个
+航 迹 点 。 给 定 时 间 窗 内 的 平 均 航 向 m e a n
+n
+， 公 式
+如下 ：
+m e a n
+n
+=
+1
+2 n
+∑
+x = - n
+n - 1
+a n g l e ( P
+t + x + 1
+ P
+t + x
+) （ 25 ）
+其中 ， a n g l e ( × ) 表示航迹点间的航迹向量 ， n = 1 ， 2 ， … ， N 。
+给定时间窗口内的航向方差 ， 表征一定时间内
+航向变动程度 。 航向方差 V
+d
+的计算公式如下 ：
+V
+d
+=
+1
+2 n - 1
+∑
+x = - n
+n - 1
+[ ]a n g l e ( P
+t + x + 1
+ P
+t + x
+) - m e a n
+n
+2
+  （ 26 ）
+前后若干航迹点航向与当前航向的差值 ， 表征
+前后若干航迹点航向与当前航向的区别 ， 可判断当
+前航向是否为短暂摆动等情况 。 航向差 D
+a
+的计算
+公式如下 ：
+D
+a
+=
+1
+2 n - 1
+∑
+x = - n
+n - 1
+|| a n g l e ( P
+t + n
+ P
+t
+) - a n g l e ( P
+t + 1
+ P
+t
+)   （ 27 ）
+航迹参数指给定时间窗内首尾两点距离与给
+定时间窗内每段距离和之比 。 航迹参数为 1 时 ， 表
+明时间窗内航迹为直线 ； 航迹参数值越小表明航迹
+曲折的程度越高
+［ 32 ］
+。 航迹参数 F
+n
+的计算公式如下 ：
+F
+n
+= d i s t
+(
+P
+t + n
+ P
+t - n
+/ ∑
+x = - n
+n - 1
+d i s t ( P
+t + x + 1
+ P
+t + x
+)
+（ 28 ）
+其中 ， d i s t ( × ) 表示航迹点距离 。
+3 　数字阵泛探雷达海空 “ 低慢小 ” 目标数据
+获取
+3 . 1 　雷达特点及参数
+数字阵泛探雷达可以看做是多输入多输出雷
+达 （ Multiple-Input-Multiple-Output ，  MIMO ） 的 特
+例
+［ 33 ］
+， 与常规波束扫描雷达相比 ， 数字阵泛探雷达
+在 “ 低慢小 ” 目标的探测中具有独特优势 ， 具体表现
+在两个方面 ： ( 1 ) 更高的多普勒分辨和杂波抑制能
+力 。 数字阵泛探雷达采用同时多波束的接收形式 ，
+“ 低慢小 ” 目标在波束和距离单元内的驻留时间较
+长 ， 使目标可获取较长的积累时间 ， 可获取更高的
+多普勒分辨率以及更为丰富的目标多普勒信息 ， 有
+利于实现目标的探测识别及目标与杂波的分离 。
+( 2 ) 较高的目标容量和数据率 。 “ 低慢小 ” 目标分类众
+多 ， 飞行成本较低 ， 所在空域目标分布较为密集 ， 故
+雷达探测需要设定较高的目标容量 。 数字阵泛探
+雷达的凝视探测机制 ， 无需波束扫描和复杂资源调
+度即可实现多目标的同时检测跟踪 ， 既保证了较高
+的目标容量 ， 又具备了较高的数据率
+［ 30 ］
+。 本文采集
+数据的数字阵泛探雷达参数如表 1 所示 。
+3 . 2 　数据采集情况
+基于数字阵泛探雷达的目标检测与识别基础
+806
+
+===== PDF PAGE 7 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+是利用回波中丰富的目标特性 ， 因此对于目标探测
+与识别可以深入挖掘数字阵泛探雷达回波中体现
+目标结构和运动特性的特征量 ， 依据此特征量实现
+目标的检测与识别 。 与特征检测同理 ， 数字阵泛探
+雷达目标探测与分类识别本质上是一个提取目标
+有效特征进而实现目标分类识别的过程 ， 性能的优
+劣在很大程度上取决于特征的选取 。 本文整理的
+数据集包括四类典型 “ 低慢小 ” 目标的多域多维特
+征图 ， 如航迹图 、 速度序列图 、 加速度序列图 、 加加
+速度序列图 、 多普勒瀑布图 、 微多普勒谱 、 动态脉冲
+回波图等 。 数字阵泛探雷达采用独立的数字化的
+收 、 发阵面 ， 不需要波束扫描 。 发射采用宽波束 ， 接
+收采用阵列同时形成多个窄波束覆盖发射区域 。
+数据集均基于表 1 的雷达参数用同一型号数字阵泛
+探雷达采集 、 处理 。 数据集详细如表 2 所示 ， 多域多
+维特征类型如表 3 所示 ， 总结归纳如图 6 所示 。
+4 　典型海空低慢小目标多域多维特征分析
+4 . 1 　动态脉冲回波特征
+各类典型目标的单帧脉冲回波图和动态脉冲
+回波图 ， 如图 7 和图 8 所示 ， 分别反映目标的形状起
+伏和回波能量波动 。 脉冲回波信号单帧幅值方差
+和多帧最大幅值方差 V
+S
+r
+0
+m
+、 V
+S m a x ( f )
+可以表示脉冲回
+波能量的波动情况 。 飞鸟群在飞翔过程中摆翅幅
+度小 ， 相应的 V
+S
+r
+0
+m
+最小 ； 飞鸟群的机动性强 ， 相应的
+V
+S m a x ( f )
+较大 。 固定翼飞机旋翼转速较低且尺寸小 ，
+相应的 V
+S
+r
+0
+m
+较小 ； 固定翼飞机在空中做曲线运动 ， 机
+动 性 强 ， 相 应 的 V
+S m a x ( f )
+较 大 。 直 升 机 的 旋 翼 尺 寸
+大 、 转速高 ， 相应的 V
+S
+r
+0
+m
+较大 ； 直升机体型大且做直
+线运动 ， 相应的 V
+S m a x ( f )
+最小 。 旋翼无人机的旋翼转
+速较高 ， 相应的 V
+S
+r
+0
+m
+较大 ； 旋翼无人机的机动性强 ，
+且体型小易受环境影响 ， 相应的 V
+S m a x ( f )
+最大 。
+单帧脉冲回波图可以表征目标的形状 。 旋翼
+无人机 、 直升机 、 固定翼飞机的旋翼按周期转动 ， 因
+此相应的单帧脉冲回波图具有周期性 。 而飞鸟在
+飞翔过程中不规律地摆动翅膀 ， 因此相应的单帧脉
+冲回波图不具有周期性 。
+时域信息熵 T I E 可以表征目标运动的复杂程
+度 。 如果目标运动 越复杂 ， 其时域信息熵越大 。 飞
+鸟在飞翔过程中摆翅不规则 、 机动性强 ， 相应的时
+域信息熵 T I E 最大 。 旋翼无人机 、 直升机 、 固定翼飞
+机机动性弱且旋翼周期转动 ， 相应的时域信 息熵
+T I E 均小于飞鸟 。 旋翼无人机的旋翼转速高 ， 直升
+表 2 　数字阵泛探雷达 “ 低慢小 ” 目标特征数据集
+Tab . 2 　 LSS target characteristics dataset for the 
+ubiquitous digital array radar
+目标类型
+飞鸟
+旋翼无人机
+固定翼无人机
+直升机
+多域多维特征数据的数量
+12983
+8600
+8499
+1697
+表 3 　 “ 低慢小 ” 目标雷达多域多维特征
+Tab . 3 　 Radar multi-domain and multi-dimensional features of LSS targets
+特征类型
+时域回波特征
+变换域多普勒特征
+长时间机动特征
+特征细分类型
+单帧脉冲回波特征
+动态脉冲回波特征 （ 周期性 、 谱尖峰数 、 信息熵 、 单帧幅值方差 、 多帧最大幅值方
+差 、 归一化脉冲回波 ）
+多普勒瀑布图
+微多普勒谱 （ 谱线数 、 谱线距离 、 谱宽 、 周期性 、 对称性 ）
+加速度序列 （ 速度变异系数 、 加速度过零点数 ）
+加加速度序列 （ 加加速度过零点数 ）
+航迹 （ 航向方差 、 航向差 、 航迹参数 ）
+表征含义
+目标的形状起伏
+目标回波能量波动
+目标帧间的动态特征
+目标的微动特征
+目标的机动性
+目标的抖动 、 震动
+目标的空间运动状态
+表 1 　数字阵泛探雷达参数
+Tab . 1 　 Parameters of the ubiquitous digital array radar
+雷达参数
+载频 /GHz
+带宽 /MHz
+发射功率 /W
+脉冲重复频率 /kHz
+脉宽 / μ s
+速度单元 / ( m/s )
+距离单元 /m
+数值
+1 . 36
+4
+400
+5
+2
+0 . 1346
+30
+807
+
+===== PDF PAGE 8 =====
+信 号 处 理 第  40  卷
+机的旋翼尺寸大 ， 相应的时域信息熵 T I E 也较大 ， 而
+固定翼飞机的旋翼转速较低且尺寸较小 ， 相应的时
+域信息熵 T I E 最小 。
+各类典型目标的脉冲回波归一化 RCS ， 如图 8
+所示 。 直升机的 RCS 最大 ， 飞鸟群的 RCS 次之 ， 固
+定翼飞机和旋翼无人机的 RCS 最小 ， 符合物理特性 。
+各类典型目标的动态脉冲回波特征 ， 如表 4 所示 。
+4 . 2 　多普勒瀑布图 （ 帧间多普勒特征 ）
+各类典型目标的多普勒瀑布图 ， 如图 9 所示 ， 反
+映目标帧间的动态特征 。 固定翼无人机由螺旋桨产
+图 6 　 “ 低慢小 ” 目标雷达多域多维特征总结归纳
+Fig . 6 　 Summary of multi-domain and multi-dimensional features of the LSS target radar
+图 8 　 “ 低慢小 ” 目标动态脉冲回波图
+Fig . 8 　 Dynamic pulse echo of LSS targets
+图 7 　 “ 低慢小 ” 目标单帧脉冲回波图
+Fig . 7 　 Single-frame pulse echo of LSS targets
+808
+
+===== PDF PAGE 9 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+生前进动力 ， 螺旋桨回波为主体部分 ， 因而其雷达回
+波几乎只有主体回波 ， 微动特征不明显 ； 但在做曲线
+等机动行为时主体回波频移波动较大 。 旋翼的叶片
+转动会产生一个相等的正和负多普勒频移 ， 直升机
+的旋翼尺寸大 、 转速高 ， 因而其微多普勒部分频率扩
+展明显且间隔小 。 旋翼无人机的叶片转动产生的微
+多普勒部分在主体回波旁等间隔 、 对称分布 ， 但旋翼
+尺寸小导致幅度远小于主体回波
+［ 28 ］
+。 飞鸟摆动翅膀
+产生的微动与无人机和直升机旋翼转动产生的微动
+存在较大的差异 。 小体型飞鸟或飞鸟处于滑翔姿态
+时 ， 即飞鸟摆动翅膀幅度较小 ， 只能观测到飞鸟本身
+的主体多普勒回波 ； 大体型飞鸟类摆动翅膀时则能
+观测到微动 ， 而当飞鸟群同时摆动翅膀时微多普勒
+部分频率扩展明显 。 各类典型目标的多普勒瀑布图
+总结归纳 ， 如表 5 所示 。
+4 . 3 　微多普勒特征
+各类典型目标的微多普勒谱 ， 如图 10 所示 ， 反
+映目标的微动特征 。 根据式 （ 15 ） ~ （ 18 ） 定义 ， 可通
+过微多普勒谱的尖峰个数 （ 谱线个数 ） 、 微多普勒谱
+的谱宽 （ 谱最外面两条微多普勒边频的间距 ） 、 微多
+普勒谱线的周期调制特性 （ 多条微多普勒边频之间
+的间隔 ） 、 微多普勒谱的周期性和对称性区别目标 ，
+如表 6 所示 。
+旋翼无人机有四个小尺寸旋翼 ， 转速稳定 ； 因
+此谱线数多 ， 谱线距离适中 ， 谱宽宽 ， 且具有周期性
+和对称性 。 固定翼飞机的螺旋桨转速低于旋翼无
+人机 ， 转速随运动速度变化 ， 但通常下转速稳定 ， 尺
+寸大于旋翼无人机 ； 因此谱线数适中 ， 谱线距离大 ，
+谱宽适中 ， 且具有周期性和对称性 。 直升机的旋翼
+尺寸大 ， 转速稳定 ； 因此谱线数多 ， 谱线距离小 ， 谱
+宽窄 ， 且具有周期性和对称性 。 飞鸟的一对翅膀摆
+动幅度 、 频次均不稳定 ， 且频次远小于飞行器 ， 飞行
+过程中存在不同的姿态 。 因此谱线数少 ， 谱线距离
+适中 ， 谱宽宽 ， 具有对称性 ， 但不具 有周期性 。
+图 9 　 “ 低慢小 ” 目标多普勒瀑布图
+Fig . 9 　 Doppler waterfall diagram of LSS targets
+表 4 　 “ 低慢小 ” 目标动态脉冲回波特征比较
+Tab . 4 　 Comparison of the dynamic pulse echo characteristics of LSS targets
+目标类型
+固定翼飞机
+直升机
+飞鸟
+旋翼无人机
+单帧脉冲回
+波周期性
+有
+有
+无
+有
+单帧脉冲回
+波谱尖峰数
+中
+多
+少
+极多
+单帧脉冲回波
+时域信息熵
+10 ~ 20
+25 ~ 30
+30 ~ 60
+20 ~ 25
+单帧幅值方差
+V
+S
+r
+0
+m
+/dB
+2
+15 ~ 20
+25 ~ 30
+13 ~ 18
+25 ~ 30
+多帧最大幅值
+方差 V
+S m a x ( f )
+/dB
+2
+28 ~ 33
+20 ~ 25
+22 ~ 28
+48 ~ 53
+归一化脉冲回波
+（ RCS ） /dB
+135 ~ 145
+170 ~ 190
+150 ~ 170
+135 ~ 145
+表 5 　 “ 低慢小 ” 目标多普勒瀑布图特征比较
+Tab . 5 　 Doppler waterfall diagram characteristics of LSS targets
+目标类型
+固定翼飞机
+直升机
+飞鸟
+旋翼无人机
+帧间多普勒特征
+几乎只有主体回波 ， 微动特征不明显
+微多普勒部分频率带宽大且间隔小
+摆翅小 ， 只能观测主体回波 ； 飞鸟群的微多普勒部分则频率扩展明显
+微多普勒部分在主体回波旁等间隔 、 对称分布
+809
+
+===== PDF PAGE 10 =====
+信 号 处 理 第  40  卷
+4 . 4 　长时间机动特征
+4 . 4 . 1 　速度
+通常情况下 ， 飞行器的运动平稳 ， 相应的速度 、 加
+速度变化平缓 、 波动小 。 若人为操控飞行器按一定规
+律航行 ， 如直升机和固定翼飞机做曲线运动 。 此时速
+度 、 加速度和加加速度波动较大 ， 但规律变化 。 飞鸟
+的机动性较强 ， 不同的运动状态其机动性也不同 。 飞
+鸟自然情况则很少进行有规律速度 、 加速度变化的飞
+行 ， 但是飞鸟在滑翔时速度 、 加速度和加加速度变化
+则较为平缓
+［ 28 ］
+。 各类典型目标的速度 、 加速度 、 加加
+速度序列图 ， 如图 11 、 图 12 和图 13 所示 ， 分别反映目
+标的机动性 、 抖动与震动和空间运动状态 。 各类典型
+目标的基于速度变化的机动特征比较 ， 如表 7 所示 。
+4 . 4 . 2 　航迹
+在实 际探测中发现 ， 直升机和固 定翼飞机基本做
+表 6 　 “ 低慢小 ” 目标微多普勒特征比较
+Tab . 6 　 Comparison of the micro-Doppler characteristics 
+of LSS targets
+目标类型
+旋翼无人机
+固定翼飞机
+直升机
+飞鸟
+谱线数
+多
+中
+多
+少
+谱线距离
+中
+大
+小
+小
+谱宽
+宽
+中
+窄
+宽
+周期性
+有
+有
+有
+无
+对称性
+有
+有
+有
+有
+图 10 　 “ 低慢小 ” 目标微多普勒谱
+Fig . 10 　 Micro-Doppler spectrum of LSS targets
+图 11 　 “ 低慢小 ” 目标速度序列图
+Fig . 11 　 Speed sequence diagram of LSS targets
+图 12 　 “ 低慢小 ” 目标加速度序列图
+Fig . 12 　 Acceleration sequence diagram of LSS targets
+810
+
+===== PDF PAGE 11 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+直线或简单的曲线运动 ， 当做直线运动时航向方差
+V
+d
+、 航向差 D
+a
+最小 ， 航迹参数 F
+n
+最大 ； 做简单的曲线运
+动时航向方差 V
+d
+、 航向差 D
+a
+最大 ， 航迹参数 F
+n
+最小 。
+旋翼无人机体型小巧轻盈且受人为操纵 ， 相应的航迹
+较为复杂 、 波动大 ， 航向方差 V
+d
+、 航向差 D
+a
+较大 ， 航迹
+参数 F
+n
+较小 。 飞鸟体型小巧 、 轻盈受环境影响 ， 因此
+飞鸟做近似于直线或曲率小的曲线运动 、 波动小 ， 航
+向方差 V
+d
+、 航向差 D
+a
+较小 ， 航迹参数 F
+n
+较大 。 各类典
+型目标的航迹 ， 如图 14 所示 。 各类典型目标归一 化的
+航向方差 V
+d
+、 航向差 D
+a
+和航迹参数 F
+n
+， 如表 8 所示 。
+表 7 　基于速度变化的机动特征比较
+Tab . 7 　 Comparison of motion characteristics based on velocity changes
+目标类型
+固定翼飞机
+直升机
+飞鸟
+旋翼无人机
+速度变异系数
+0 . 9 ~ 1 . 0
+0 . 3 ~ 0 . 4
+0 . 05 ~ 0 . 1
+0 . 1 ~ 0 . 2
+加速度过零点数
+0 . 2 ~ 0 . 25
+0 . 25 ~ 0 . 3
+0 . 30 ~ 0 . 35
+0 . 15 ~ 0 . 2
+加加速度过零点数
+0 . 1 ~ 0 . 15
+0 . 3 ~ 0 . 35
+0 . 4 ~ 0 . 6
+0 . 15 ~ 0 . 25
+图 13 　 “ 低慢小 ” 目标加加速度序列图
+Fig . 13 　 Variable acceleration sequence diagram of LSS targets
+表 8 　 “ 低慢小 ” 目标航迹特征
+Tab . 8 　 Trajectory characteristics of LSS targets
+目标类型
+固定翼飞机
+直升机
+飞鸟
+旋翼无人机
+航向方差 V
+d
+100 ~ 300
+1 . 5 ~ 5 . 0
+5 ~ 10
+30 ~ 100
+航向差 D
+a
+0 . 97 ~ 1 . 0
+0 . 85 ~ 0 . 9
+0 . 9 ~ 0 . 95
+0 . 95 ~ 0 . 97
+航迹参数 F
+n
+0 . 25 ~ 0 . 3
+0 . 90 ~ 0 . 95
+0 . 6 ~ 0 . 8
+0 . 4 ~ 0 . 6
+图 14 　 “ 低慢小 ” 目标航迹图
+Fig . 14 　 Trajectory map of LSS targets
+811
+
+===== PDF PAGE 12 =====
+信 号 处 理 第  40  卷
+5 　结论
+本文基于数字阵泛探雷达系统 ， 详细地对海空
+背景下 “ 低慢小 ” 目标的脉冲回波建模 ， 再依据距离 -
+方位 - 帧数据立方体提取机动特征 ， 依据距离 - 脉冲 - 帧
+数据立方体提取时域回波特征 、 变换域多普勒特征 、
+长时间机动特征等 7 类 19 种多域多维特征 。 最后利
+用采集的实测 “ 低慢小 ” 目标数据集进行理论分析 ， 对
+不同典型目标提取的特征做定性比较 ， 总结和验证不
+同典型目标提取特征的差异性 。 数据分析结果表明 ：
+信号特征方面 ， 旋翼无人机 、 直升机 、 固定翼飞
+机的单帧脉冲回波图具有周期性 ； 飞鸟的单帧脉冲
+回波不规则波动 ， 不具有周期性 。 飞鸟的回波时域
+信息熵最大 ， 直升机和固定翼飞机的回波时域信息
+熵次之 ， 旋翼无人机的回波时域信息熵最小 。 直升
+机的 RCS 最大 ， 飞鸟群的 RCS 次之 ， 固定翼飞机和
+旋翼无人机的 RCS 最小 。 直升机 、 旋翼无人机和固
+定翼飞机的微动特征明显且具有周期性变化 ； 飞鸟
+群的存在一定微动特征 ， 但不具有周期性变化 。
+机动特征方面 ， 飞行器的运动相对平稳 ， 相应
+的速度 、 加速度变化更为平缓 ； 若人为操控按照一
+定规律飞行 ， 直升机 、 旋翼无人机和固定翼飞机的
+速度 、 加速度波动较大 ， 但规律变化 ； 而飞鸟的机动
+性则较强 ， 且没有规律 。 直升机和固定翼飞机基本
+做直线或简单的曲线运动 ； 飞鸟做近似于直线或曲
+率小的曲线运动 ； 旋翼无人机受人为操纵 ， 相应的
+航迹较为复杂 。
+后续的研究可基于提取的多域多维特征对无
+人机的类别和飞鸟的体型进行精细化区分 ， 以满足
+对不同情况下的识别需求 。
+参考文献
+［ 1 ］ 陈 唯实 ，  黄 毅峰 ，  陈小龙 ，  等 .  机场探鸟雷达技术发展
+与应用综述 ［ J ］ .  航空学报 ，  2022 ，  43 （ 1 ） ：  176 - 196 .
+CHEN Weishi ，  HUANG Yifeng ，  CHEN Xiaolong ，  et 
+al .  Development and applications of airport avian radar ：  
+Review ［ J ］ .  Acta Aeronauticaet Astronautica Sinica ，  
+2022 ，  43 （ 1 ） ：  176 - 196 .（ in Chinese ）
+［ 2 ］ 陈小龙 ， 陈唯实 ， 饶云华 ， 等 . 飞鸟与无人机目标雷达探
+测与识别技术进展与展望 ［ J ］ .  雷达学报 ，  2020 ，  9（ 5 ） ：  
+803 - 827 .
+CHEN Xiaolong ，  CHEN Weishi ，  RAO Yunhua ，  et al .  
+Progress and prospects of radar target detection and rec ‐
+ognition technology for flying birds and unmanned 
+aerial vehicles ［ J ］ .  Journal of Radars ，  2020 ，  9（ 5 ） ：  803 -
+827 .（ in Chinese ）
+［ 3 ］ MOLCHANOV P ，  EGIAZARIAN K ，  ASTOLA J ，  et 
+al .  Classification of small UAVs and birds by micro-
+Doppler signatures ［ C ］ // 2013  European Radar Confer ‐
+ence .  Nuremberg ，  Germany .  IEEE ，  2013 ：  172 - 175 .
+［ 4 ］ SUN Yingxiang ，  FU Hua ，  ABEYWICKRAMA S ，  et al .  
+Drone classification and localization using micro-Doppler  
+signature with low-frequency signal ［ C ］ // 2018  IEEE In ‐
+ternational Conference on Communication Systems （ ICCS ） .  
+Chengdu ，  China .  IEEE ，  2018 ：  413 - 417 .
+［ 5 ］ 牟效乾 ， 陈小龙 ， 苏宁远 ， 等 . 基于时频图深度学习的
+雷达动目标检测与分类 ［ J ］ .  太赫兹科学与电子信息学
+报 ，  2019 ，  17 （ 1 ） ：  105 - 111 .
+MOU Xiaoqian ，  CHEN Xiaolong ，  SU Ningyuan ，  et al .  
+Radar detection and classification of moving target using 
+deep convolutional neural networks on time-frequency 
+graphs ［ J ］ . Journal of Terahertz Science and Electronic Infor ‐
+mation Technology ， 2019 ， 17 （ 1 ） ： 105 - 111 .  （ in Chinese ）
+［ 6 ］ CHEN Xiaolong ，  ZHANG Hai ，  SONG Jie ，  et al .  
+Micro-motion classification of flying bird and rotor 
+drones via data augmentation and modified multi-scale 
+CNN ［ J ］ .  Remote Sensing ，  2022 ，  14 （ 5 ） ：  1107 .
+［ 7 ］ 陈小龙 ， 南钊 ， 张海 ， 等 . 飞鸟与旋翼无人机雷达微多普勒
+测量实验研究 ［ J ］ .  电波科学学报 .  2021 ，  36 （ 5 ） ：  704 - 714 .
+CHEN Xiaolong ，  NAN Zhao ，  ZHANG Hai ，  et al .  Ex ‐
+perimental research on radar micro-Doppler of flying 
+bird and rotor UAV ［ J ］ .  Chinese Journal of Radio Sci ‐
+ence ，  2021 ，  36 （ 5 ） ：  704 - 714 .  （ in Chinese ）
+［ 8 ］ TAN R ，  LIM H S ，  SMITS A B ，  et al .  Improved micro-
+Doppler features extraction using Smoothed-Pseudo Wigner-
+Ville Distribution ［ C ］ // 2016  IEEE Region 10  Conference 
+（ TENCON ） .  Singapore .  IEEE ，  2016 ：  730 - 733 .
+［ 9 ］ CHEN Kun ，  LI Y uehua ，  XU Xingjian .  Rotating target clas ‐
+sification base on micro-Doppler features using a modified 
+adaptive boosting algorithm ［ C ］ // 2015  International Confer ‐
+ence on Computers ，  Communications ，  and Systems 
+（ ICCCS ） .  Kanyakumari ，  India .  IEEE ，  2015 ：  236 - 240 .
+［ 10 ］ SHI Sainan ，  SHUI Penglang .  Sea-surface floating small 
+target detection by one-class classifier in time-frequency 
+feature space ［ J ］ .  IEEE Transactions on Geoscience and 
+Remote Sensing ，  2018 ，  56 （ 11 ） ：  6395 - 6411 .
+［ 11 ］ REN Jianfeng ，  JIANG Xudong .  Regularized 2 -D complex-
+log  spectral analysis and subspace reliability analysis of 
+micro-Doppler signature for UAV detection ［ J ］ .  Pattern 
+Recognition ，  2017 ，  69 （ C ） ：  225 - 237 .
+［ 12 ］ TORVIK B ，  OLSEN K E ，  GRIFFITHS H D .  Classifica ‐
+tion of birds and UAVs based on radar polarimetry ［ J ］ .  
+IEEE Geoscience and Remote Sensing Letters ，  2016 ，  
+812
+
+===== PDF PAGE 13 =====
+第  5  期 邓振华  等 ：  海空背景下低慢小目标泛探雷达多域多维特征建模与分析
+13 （ 9 ） ：  1305 - 1309 .
+［ 13 ］ XU Shuwen ，  ZHENG Jibin ，  PU Jia ，  et al .  Sea-surface 
+floating small target detection based on polarization fea ‐
+tures ［ J ］ .  IEEE Geoscience and Remote Sensing Let ‐
+ters ，  2018 ，  15 （ 10 ） ：  1505 - 1509 .
+［ 14 ］ SHI Yanling ，  ZHANG Xueliang ，  LIU Zipeng .  Floating 
+small target detection in sea clutter based on jointed fea ‐
+tures in FRFT domain ［ C ］ //GUI G ，  YUN L .  Interna ‐
+tional Conference on Advanced Hybrid Information Pro ‐
+cessing .  Cham ：  Springer ，  2019 ：  128 - 139 .
+［ 15 ］ 顾智敏 ， 张兴敢 ， 王琼 . FRFT 域内的海杂波多重分形特性
+与目标检测 ［ J ］ .  南京大学学报 ： 自然科学 ，  2017 ，  53 （ 4 ） ：  
+731 - 737 .
+GU Zhimin ，  ZHANG Xinggan ，  WANG Qiong .  Multi ‐
+fractal property and target detection of sea clutter in 
+FRFT domain ［ J ］ .  Journal of Nanjing University （ Natu ‐
+ral Science ） ，  2017 ，  53 （ 4 ） ：  731 - 737 .  （ in Chinese ）
+［ 16 ］ KIM K T ，  SEO D K ，  KIM H T .  Efficient radar target 
+recognition using the MUSIC algorithm and invariant 
+features ［ J ］ .  IEEE Transactions on Antennas and Propa ‐
+gation ，  2002 ，  50 （ 3 ） ：  325 - 337 .
+［ 17 ］ GHADAKI H ，  DIZAJI R .  Target track classification for 
+airport surveillance radar （ ASR ） ［ C ］ // 2006  IEEE Con ‐
+ference on Radar .  Verona ，  NY ，  USA .  IEEE ，  2006 ：  4 .
+［ 18 ］ SAMARAS S ，  MAGOULIANITIS V ，  DIMOU A ，  et 
+al .  UAV classification with deep learning using surveil-
+lance radar data ［ C ］ //TZOV ARAS D ，  GIAKOUMIS D ，  
+VINCZE M ，  et al .  International Conference on Com ‐
+puter Vision Systems .  Cham ：  Springer ，  2019 ：  744 - 753 .
+［ 19 ］ LI Yuzhou ，  XIE Pengcheng ，  TANG Zeshen ，  et al .  
+SVM-based sea-surface small target detection ：  A false-
+alarm-rate-controllable approach ［ J ］ .  IEEE Geoscience 
+and Remote Sensing Letters ，  2019 ，  16 （ 8 ） ：  1225 - 1229 .
+［ 20 ］ ZHOU Hongkuan ，  JIANG Tao .  Decision tree based sea-
+surface weak target detection with false alarm rate con ‐
+trollable ［ J ］ .  IEEE Signal Processing Letters ，  2019 ，  26 （ 6 ） ：  
+793 - 797 .
+［ 21 ］ 田凯祥 ，  李保珠 ，  王中训 ，  等 .  低海况下多姿态海上目
+标 特 征 分 析 ［ J/OL ］ .  雷 达 科 学 与 技 术 ，  2023 ：  1 - 8 .  
+（ 2023 - 12 - 21 ） .  https ： //kns . cnki . net/kcms/detail/ 34 . 1264 .
+TN . 20231220 . 1447 . 004 . html .
+TIAN Kaixiang ，  LI Baozhu ，  WANG Zhongxun ，  et al .  
+Characterization of multi-attitude maritime targets in 
+low sea state ［ J/OL ］ .  Radar Science and Technology ，  
+2023 ：  1 - 8 .  （ 2023 - 12 - 21 ） .  https ： //kns . cnki . net/kcms/de ‐
+tail/ 34 . 1264 . TN . 20231220 . 1447 . 004 . html .（ in Chinese ）
+［ 22 ］ 罗俊海 ， 王芝燕 . 无人机探测与对抗技术发展及应用
+综述 ［ J ］ .  控制与决策 ，  2022 ，  37 （ 3 ） ：  530 - 544 .
+LUO Junhai ，  WANG Zhiyan .  A review of development 
+and application of UAV detection and counter technol ‐
+ogy ［ J ］ .  Control and Decision ，  2022 ，  37 （ 3 ） ：  530 - 544 .
+（ in Chinese ）
+［ 23 ］ 郭瑞 ， 张月 ， 田彪 ， 等 . 全息凝视雷达系统技术与发展
+应用综述 ［ J ］ .  雷达学报 ，  2023 ，  12 （ 2 ） ：  389 - 411 .
+GUO Rui ，  ZHANG Yue ，  TIAN Biao ，  et al .  Review of 
+the technology ，  development and applications of holo ‐
+graphic staring radar ［ J ］ .  Journal of Radars ，  2023 ，  12 （ 2 ） ：  
+389 - 411 .  （ in Chinese ）
+［ 24 ］ JAHANGIR M ，  BAKER C J .  L-band staring radar perfor ‐
+mance against micro-drones ［ C ］ // 2018  19 th International Ra ‐
+dar Symposium （ IRS ） .  Bonn ，  Germany .  IEEE ，  2018 ：  1 - 10 .
+［ 25 ］ BENNETT C ，  JAHANGIR M ，  FIORANELLI F ，  et al .  
+Use of symmetrical peak extraction in drone micro-Doppler 
+classification for staring radar ［ C ］ // 2020  IEEE Radar Con ‐
+ference （ RadarConf 20 ） .  Florence ，  Italy .  IEEE ，  2020 ：  1 - 6 .
+［ 26 ］ JAHANGIR M ，  ATKINSON G M ，  ANTONIOU M ，  et 
+al .  Measurements of birds and drones with L-band star ‐
+ing radar ［ C ］ // 2021  21 st International Radar Symposium 
+（ IRS ） .  Berlin ，  Germany .  IEEE ，  2021 ：  1 - 10 .
+［ 27 ］ GRIFFIN B ，  BALLERI A ，  BAKER C ，  et al .  Prototyp ‐
+ing a Dual-Channel Receiver for use in a Staring Co-
+operative Radar Network for the Detection of Drones
+［ C ］ // 2021  21 st International Radar Symposium （ IRS ） .  
+Berlin ，  Germany .  IEEE ，  2021 ：  1 - 7 .
+［ 28 ］ 徐世友 ， 戴婷 ， 陈曾平 . 基于多维特征的全息雷达 “ 低
+慢小 ” 目标识别 ［ J ］ .  现代雷达 ，  2022 ，  44 （ 11 ） ： 1 - 9 .
+XU Shiyou ，  DAI Ting ，  CHEN Zengping .  LSS target recog ‐
+nition in holographic radar based on multi-dimensional fea ‐
+tures ［ J ］ .  Modern Radar ，  2022 ，  44 （ 11 ） ：  1 - 9 .  （ in Chinese ）
+［ 29 ］ 张文鹏 ， 黎湘 ， 刘永祥 .  雷达目标微动表征 、 估计与识别
+研究 ［ J ］ .  中国科学 （ 信息科学 ） ，  2023 ，  53 （ 8 ） ：  1469 - 1489 .
+ZHANG Wenpeng ，  LI Xiang ，  LIU Yongxiang .  Re ‐
+search on representation ，  estimation and recognition for 
+radar targets with micro-motion ［ J ］ .  Scientia Sinica （ In ‐
+formationis ） ，  2023 ，  53 （ 8 ） ：  1469 - 1489 .  （ in Chinese ）
+［ 30 ］ 吴琪 .  基于多维特征融合的 “ 低慢小 ”  目标自动识别关
+键技术研究 ［ D ］ .  长沙 ：  国防科技大学 ，  2019 .
+WU Qi .  Research on automatic target recognition of 
+LSS targets based on multi-dimensional feature fusion
+［ D ］ . Changsha ：  National University of Defense Tech ‐
+nology ，  2019 .（ in Chinese ）
+［ 31 ］ 陈小龙 ，  袁旺 ，  杜晓林 ，  等 .  多波段 FMCW 雷达低慢
+小探测数据集 （ LSS-FMCWR- 1 . 0 ） 及高分辨微动特征
+提取方法 ［ J/OL ］ .  雷达学报 ，  2023 ：  1 - 15 .  （ 2023 - 10 - 18 ） .  
+https ： //kns . cnki . net/kcms/detail/ 10 . 1030 . tn . 20231116 . 0938 .
+813
+
+===== PDF PAGE 14 =====
+信 号 处 理 第  40  卷
+002 . html .
+CHEN Xiaolong ，  YUAN Wang ，  DU Xiaolin ，  et al .  
+Multiband FMCW radar LSS-target detection dataset 
+（ LSS-FMCWR- 1 . 0 ）  and high-resolution micromotion 
+feature extraction method ［ J/OL ］ .  Journal of Radars ，  
+2023 ：  1 - 15 .  （ 2023 - 10 - 18 ） .  https ： //kns . cnki . net/kcms/
+detail/ 10 . 1030 . tn . 20231116 . 0938 . 002 . html .  （ in Chinese ）
+［ 32 ］ 周惊雷 ， 李作康 ， 于志伟 ， 等 .  空中目标航迹识别方法
+［ J ］ .  指挥信息系统与技术 ，  2023 ，  14 （ 5 ） ： 80 - 85 .
+ZHOU Jinglei ，  LI Zuokang ，  YU Zhiwei ，  et al .  Method 
+for air target trajectory recognition ［ J ］ .  Command In-
+formation System and Technology ，  2023 ，  14 （ 5 ） ：  80 - 85 .  
+（ in Chinese ）
+［ 33 ］ 陈小龙 ， 黄勇 ， 关键 ， 等 .  MIMO 雷达微弱目标长时积
+累技术综述 ［ J ］ .  信号处理 ，  2020 ，  36 （ 12 ） ：  1947 - 1964 .
+CHEN Xiaolong ，  HUANG Yong ，  GUAN Jian ，  et al .  
+Review of long-time integration techniques for weak tar ‐
+gets using MIMO radar ［ J ］ .  Journal of Signal Process ‐
+ing ，  2020 ，  36 （ 12 ） ：  1 947 - 1964 .  （ in Chinese ）
+作者简介
+邓振华 　 男 ， 1999 年 生 ， 广 东 肇 庆
+人 。 哈尔滨工程大学烟台研究院硕士生 ，
+主要研究方向为基于深度学习的海空背
+景目标识别 、 分类 。
+E-mail ： dengchunwah@ 163 . com
+陈小龙 　 男 ， 1985 年 生 ， 山 东 烟 台
+人 。 海军航空大学教授 ， 博士 ， 主要研究
+方向为雷达低慢小目标检测 、 海上目标检
+测与识别 、 雷达智能信号处理等 。
+E-mail ： cxlcxl 1209 @ 163 . com
+薛 伟 　 男 ， 1970 年生 ， 黑龙江富锦
+人 。 哈尔滨工程大学烟台研究院教授 ， 主
+要研究方向包括水下及地下无线通信技
+术 、 通信信号检测与识别技术等 。
+E-mail ： xuewei@hrbeu . edu . cn
+张 月 　 男 ， 1980 年 生 ， 辽 宁 辽 阳
+人 。 中山大学电子与通信工程学院副教
+授 ， 博士生导师 ， 主要研究方向为宽带数
+字化接收机技术 、 新体制数字阵列雷达系
+统及信号处理技术等 。
+E-mail ： zhangyue 8 @mail . sysu . edu . cn
+汪兴海 　 男 ， 1987 年 生 ， 山 东 临 清
+人 。 海军航空大学副教授 ， 主要研究方向
+为雷达系统设计 、 数字信号处理等 。
+E-mail ： marshallplan@ 126 . com
+关 键 　 男 ， 1968 年 生 ， 辽 宁 锦 州
+人 。 海军航空大学教授 ， 主要研究方向包
+括雷达目标检测与跟踪 、 侦察图像处理和
+信息融合 。
+E-mail ： guanjian_ 68 @ 163 . com
+赵志坚 　 男 ， 1980 年 生 ， 山 东 滨 州
+人 。 海军航空大学副教授 ， 硕士 ， 主要从
+事航空器适航与飞行安全 、 鸟击防范 、 军
+用标准化等相关研究工作 。
+E-mail ： 626548803 @qq . com
+（ 责任编辑 ： 边熙淳 ）
+814
